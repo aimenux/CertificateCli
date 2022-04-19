@@ -1,3 +1,5 @@
+[![.NET](https://github.com/aimenux/CertificateCli/actions/workflows/ci.yml/badge.svg)](https://github.com/aimenux/CertificateCli/actions/workflows/ci.yml)
+
 # CertificateCli
 ```
 A global tool to generate rsa certificates and json web keys
