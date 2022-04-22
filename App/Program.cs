@@ -5,7 +5,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using static App.Extensions.PathExtensions;
 
 namespace App;
 
@@ -20,12 +19,9 @@ public static class Program
         Host.CreateDefaultBuilder(args)
             .ConfigureAppConfiguration((_, config) =>
             {
-                config.AddCommandLine(args);
+                config.AddJsonFile();
                 config.AddEnvironmentVariables();
-                config.SetBasePath(GetDirectoryPath());
-                var environment = Environment.GetEnvironmentVariable("ENVIRONMENT");
-                config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
-                config.AddJsonFile($"appsettings.{environment}.json", optional: true, reloadOnChange: true);
+                config.AddCommandLine(args);
             })
             .ConfigureLogging((hostingContext, loggingBuilder) =>
             {
