@@ -14,8 +14,8 @@ public class JwkHelper : IJwkHelper
 {
     public string GenerateJwk(JwkParameters parameters)
     {
-        var certificate = new X509Certificate2(parameters.CertificateFile, parameters.CertificatePassword);
-        var rsaKey = certificate.GetRSAPublicKey();
+        using var certificate = new X509Certificate2(parameters.CertificateFile, parameters.CertificatePassword);
+        using var rsaKey = certificate.GetRSAPublicKey();
         if (rsaKey is null)
         {
             throw new InvalidOperationException("Unsupported certificate: public key is not RSA");
