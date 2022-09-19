@@ -31,13 +31,14 @@ public static class Program
             })
             .ConfigureServices((_, services) =>
             {
-                services.AddTransient<MainCommand>();
-                services.AddTransient<JwkCommand>();
-                services.AddTransient<RsaCommand>();
-                services.AddTransient<IJwkHelper, JwkHelper>();
-                services.AddTransient<IRsaHelper, RsaHelper>();
-                services.AddTransient<IConsoleHelper, ConsoleHelper>();
-                services.AddTransient<ICertificateManagerWrapper, CertificateManagerWrapper>();
+                services.Scan(scan =>
+                {
+                    scan.FromCallingAssembly()
+                        .FromAssemblies(typeof(ConsoleHelper).Assembly)
+                        .AddClasses()
+                        .AsImplementedInterfaces()
+                        .WithTransientLifetime();
+                });
                 services.AddCertificateManager();
             });
 }

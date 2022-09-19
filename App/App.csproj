@@ -4,13 +4,13 @@
 		<OutputType>Exe</OutputType>
 		<TargetFramework>net6.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
-		<Version>0.0.1-beta</Version>
+		<Version>0.0.2-beta</Version>
 		<PackAsTool>true</PackAsTool>
 		<PackageId>CertificateCli</PackageId>
 		<PackageOutputPath>../Nugets</PackageOutputPath>
-		<ToolCommandName>CertificateCli</ToolCommandName>
+		<ToolCommandName>Certificate</ToolCommandName>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Description>A global tool to generate rsa certificates and json web keys</Description>
+		<Description>A global tool to generate rsa/ecc certificates and json web keys</Description>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -21,6 +21,7 @@
 		<PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
 		<PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Options" Version="6.0.0" />
+		<PackageReference Include="Scrutor" Version="4.2.0" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -5,6 +5,21 @@ using TextCopy;
 
 namespace Lib.Helpers;
 
+public interface IConsoleHelper
+{
+    void RenderTitle(string text);
+
+    void CopyTextToClipboard(string text);
+
+    void RenderSettingsFile(string filepath);
+
+    void RenderPfx(PfxParameters parameters);
+
+    void RenderJwk(JwkParameters parameters, string jwk);
+
+    void RenderException(Exception exception);
+}
+
 public class ConsoleHelper : IConsoleHelper
 {
     public void RenderTitle(string text)
@@ -36,18 +51,20 @@ public class ConsoleHelper : IConsoleHelper
         AnsiConsole.WriteLine();
     }
 
-    public void RenderRsa(RsaParameters parameters)
+    public void RenderPfx(PfxParameters parameters)
     {
         var dns = parameters.DnsName;
         var keySize = parameters.KeySize;
         var years = parameters.ValidityInYears;
-        var file = parameters.CertificateFile;
+        var file = parameters.CertificateFullPath;
+        var directory = parameters.OutputDirectory;
         var password = parameters.CertificatePassword;
+        var type = parameters.PfxType.ToString().ToUpper();
 
         var table = new Table()
             .BorderColor(Color.White)
             .Border(TableBorder.Square)
-            .Title("[yellow]1 RSA certificate(s) generated[/]")
+            .Title($"[yellow]1 {type} certificate(s) generated[/]")
             .AddColumn(new TableColumn("[u]File[/]").Centered())
             .AddColumn(new TableColumn("[u]Password[/]").Centered())
             .AddColumn(new TableColumn("[u]DnsName[/]").Centered())

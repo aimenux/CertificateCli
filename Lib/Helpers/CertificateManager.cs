@@ -5,7 +5,7 @@ using CertificateManager.Models;
 
 namespace Lib.Helpers
 {
-    public interface ICertificateManagerWrapper
+    public interface ICertificateManager
     {
         X509Certificate2 NewRsaSelfSignedCertificate(
             DistinguishedName distinguishedName,
@@ -16,18 +16,27 @@ namespace Lib.Helpers
             X509KeyUsageFlags x509KeyUsageFlags,
             RsaConfiguration rsaConfiguration);
 
+        X509Certificate2 NewEccSelfSignedCertificate(
+            DistinguishedName distinguishedName,
+            BasicConstraints basicConstraints,
+            ValidityPeriod validityPeriod,
+            SubjectAlternativeName subjectAlternativeName,
+            OidCollection enhancedKeyUsages,
+            X509KeyUsageFlags x509KeyUsageFlags,
+            ECDsaConfiguration eccConfiguration);
+
         byte[] ExportSelfSignedCertificatePfx(X509Certificate2 certificate, string password);
     }
 
-    public class CertificateManagerWrapper : ICertificateManagerWrapper
+    public class CertificateManager : ICertificateManager
     {
         private readonly CreateCertificates _createCertificates;
         private readonly ImportExportCertificate _importExportCertificate;
 
-        public CertificateManagerWrapper(CreateCertificates createCertificates, ImportExportCertificate importExportCertificate)
+        public CertificateManager(CreateCertificates createCertificates, ImportExportCertificate importExportCertificate)
         {
-            _createCertificates = createCertificates;
-            _importExportCertificate = importExportCertificate;
+            _createCertificates = createCertificates ?? throw new ArgumentNullException(nameof(createCertificates));
+            _importExportCertificate = importExportCertificate ?? throw new ArgumentNullException(nameof(importExportCertificate));
         }
 
         public X509Certificate2 NewRsaSelfSignedCertificate(
@@ -40,6 +49,18 @@ namespace Lib.Helpers
             RsaConfiguration rsaConfiguration)
         {
             return _createCertificates.NewRsaSelfSignedCertificate(distinguishedName, basicConstraints, validityPeriod, subjectAlternativeName, enhancedKeyUsages, x509KeyUsageFlags, rsaConfiguration);
+        }
+
+        public X509Certificate2 NewEccSelfSignedCertificate(
+            DistinguishedName distinguishedName,
+            BasicConstraints basicConstraints,
+            ValidityPeriod validityPeriod,
+            SubjectAlternativeName subjectAlternativeName,
+            OidCollection enhancedKeyUsages,
+            X509KeyUsageFlags x509KeyUsageFlags,
+            ECDsaConfiguration eccConfiguration)
+        {
+            return _createCertificates.NewECDsaSelfSignedCertificate(distinguishedName, basicConstraints, validityPeriod, subjectAlternativeName, enhancedKeyUsages, x509KeyUsageFlags, eccConfiguration);
         }
 
         public byte[] ExportSelfSignedCertificatePfx(X509Certificate2 certificate, string password)

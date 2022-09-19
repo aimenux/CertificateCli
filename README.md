@@ -2,18 +2,20 @@
 
 # CertificateCli
 ```
-A global tool to generate rsa certificates and json web keys
+A global tool to generate rsa/ecc certificates and json web keys
 ```
 
-> In this repo, i m building a global tool that allows to generate rsa certificates and json web keys.
+> In this repo, i m building a global tool that allows to generate rsa/ecc certificates and json web keys.
 >
 > The tool is based on two sub commmands :
 > - Use sub command `Rsa` to generate an rsa certificate
+> - Use sub command `Ecc` to generate an ecc certificate
 > - Use sub command `Jwk` to generate a jwk from an rsa certificate
 >
 >
 > To run code in debug or release mode, type the following commands in your favorite terminal : 
 > - `.\App.exe Rsa -f [certificate-file] -p [certificate-password]`
+> - `.\App.exe Ecc -f [certificate-file] -p [certificate-password]`
 > - `.\App.exe Jwk -f [certificate-file] -p [certificate-password]`
 >
 >
@@ -21,6 +23,7 @@ A global tool to generate rsa certificates and json web keys
 > - `dotnet tool install -g --configfile .\Nugets\local.config CertificateCli`
 > - `CertificateCli -h`
 > - `CertificateCli Rsa -f [certificate-file] -p [certificate-password]`
+> - `CertificateCli Ecc -f [certificate-file] -p [certificate-password]`
 > - `CertificateCli Jwk -f [certificate-file] -p [certificate-password]`
 > - `dotnet tool update -g CertificateCli --ignore-failed-sources`
 > - `dotnet tool uninstall -g CertificateCli`

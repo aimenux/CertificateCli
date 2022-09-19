@@ -5,7 +5,7 @@ using static App.Extensions.PathExtensions;
 namespace App.Commands;
 
 [Command(Name = "CertificateCli", FullName = "Generate RSA/JWK", Description = "Generate RSA/JWK.")]
-[Subcommand(typeof(JwkCommand), typeof(RsaCommand))]
+[Subcommand(typeof(JwkCommand), typeof(RsaCommand), typeof(EccCommand))]
 [VersionOptionFromMember(MemberName = nameof(GetVersion))]
 public class MainCommand : AbstractCommand
 {

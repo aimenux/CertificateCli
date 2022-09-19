@@ -14,7 +14,7 @@ public class JwkCommand : AbstractCommand
 
     public JwkCommand(IJwkHelper jwkHelper, IConsoleHelper consoleHelper) : base(consoleHelper)
     {
-        _jwkHelper = jwkHelper;
+        _jwkHelper = jwkHelper ?? throw new ArgumentNullException(nameof(jwkHelper));
     }
 
     [Required]
