@@ -28,8 +28,11 @@ public class EccCommand : PfxCommand
             PfxType = PfxType.Ecc
         };
 
-        CertificateHelper.GenerateEcc(parameters);
-        ConsoleHelper.RenderPfx(parameters);
+        ConsoleHelper.RenderStatus(() =>
+        {
+            CertificateHelper.GenerateEcc(parameters);
+            ConsoleHelper.RenderPfx(parameters);
+        });
     }
 
     protected override bool IsValidKeySize()

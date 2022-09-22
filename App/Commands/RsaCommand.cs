@@ -28,8 +28,11 @@ namespace App.Commands
                 PfxType = PfxType.Rsa
             };
 
-            CertificateHelper.GenerateRsa(parameters);
-            ConsoleHelper.RenderPfx(parameters);
+            ConsoleHelper.RenderStatus(() =>
+            {
+                CertificateHelper.GenerateRsa(parameters);
+                ConsoleHelper.RenderPfx(parameters);
+            });
         }
 
         protected override bool IsValidKeySize()

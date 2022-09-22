@@ -13,6 +13,10 @@ public interface IConsoleHelper
 
     void RenderSettingsFile(string filepath);
 
+    void RenderStatus(Action action, Spinner spinner = null);
+
+    void RenderStatus(string message, Action action, Spinner spinner = null);
+
     void RenderPfx(PfxParameters parameters);
 
     void RenderJwk(JwkParameters parameters, string jwk);
@@ -22,6 +26,8 @@ public interface IConsoleHelper
 
 public class ConsoleHelper : IConsoleHelper
 {
+    private static readonly IRandomHelper RandomHelper = new RandomHelper();
+
     public void RenderTitle(string text)
     {
         AnsiConsole.WriteLine();
@@ -51,13 +57,26 @@ public class ConsoleHelper : IConsoleHelper
         AnsiConsole.WriteLine();
     }
 
+    public void RenderStatus(Action action, Spinner spinner) => RenderStatus("Work is in progress ...", action, spinner);
+
+    public void RenderStatus(string message, Action action, Spinner spinner)
+    {
+        spinner ??= RandomHelper.RandomSpinner();
+
+        AnsiConsole.Status()
+            .Start(message, ctx =>
+            {
+                ctx.Spinner(spinner);
+                action.Invoke();
+            });
+    }
+
     public void RenderPfx(PfxParameters parameters)
     {
         var dns = parameters.DnsName;
         var keySize = parameters.KeySize;
         var years = parameters.ValidityInYears;
         var file = parameters.CertificateFullPath;
-        var directory = parameters.OutputDirectory;
         var password = parameters.CertificatePassword;
         var type = parameters.PfxType.ToString().ToUpper();
 
