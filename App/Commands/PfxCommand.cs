@@ -37,10 +37,10 @@ public abstract class PfxCommand : AbstractCommand
         return !string.IsNullOrWhiteSpace(CertificateFile)
                && !string.IsNullOrWhiteSpace(CertificatePassword)
                && !string.IsNullOrWhiteSpace(DnsName)
-               && KeySize is 1024 or 2048 or 4096 or 256 or 374 or 512
                && ValidityInYears is >= 1 and <= 10
                && Directory.Exists(OutputDirectory)
-               && IsCertificateFilePathValid();
+               && IsCertificateFilePathValid()
+               && IsValidKeySize();
     }
 
     private bool IsCertificateFilePathValid()
@@ -57,4 +57,6 @@ public abstract class PfxCommand : AbstractCommand
             ? defaultDir
             : Path.GetFullPath("./");
     }
+
+    protected abstract bool IsValidKeySize();
 }

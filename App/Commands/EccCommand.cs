@@ -32,5 +32,10 @@ public class EccCommand : PfxCommand
         ConsoleHelper.RenderPfx(parameters);
     }
 
+    protected override bool IsValidKeySize()
+    {
+        return KeySize is 160 or 224 or 256 or 384 or 521;
+    }
+
     protected static string GetVersion() => GetVersion(typeof(EccCommand));
 }

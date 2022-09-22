@@ -32,6 +32,11 @@ namespace App.Commands
             ConsoleHelper.RenderPfx(parameters);
         }
 
+        protected override bool IsValidKeySize()
+        {
+            return KeySize is 1024 or 2048 or 3072 or 7680 or 15360;
+        }
+
         protected static string GetVersion() => GetVersion(typeof(RsaCommand));
     }
 }
