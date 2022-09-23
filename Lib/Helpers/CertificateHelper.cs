@@ -3,6 +3,7 @@ using System.Security.Cryptography.X509Certificates;
 using CertificateManager;
 using CertificateManager.Models;
 using Lib.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace Lib.Helpers;
 
@@ -15,10 +16,12 @@ public interface ICertificateHelper
 public class CertificateHelper : ICertificateHelper
 {
     private readonly ICertificateManager _manager;
+    private readonly IOptions<Settings> _options;
 
-    public CertificateHelper(ICertificateManager manager)
+    public CertificateHelper(ICertificateManager manager, IOptions<Settings> options)
     {
         _manager = manager ?? throw new ArgumentNullException(nameof(manager));
+        _options = options ?? throw new ArgumentNullException(nameof(options));
     }
 
     public void GenerateRsa(PfxParameters parameters)
@@ -95,10 +98,18 @@ public class CertificateHelper : ICertificateHelper
         return enhancedKeyUsages;
     }
 
-    private static X509KeyUsageFlags GetKeyUsageFlags()
+    private X509KeyUsageFlags GetKeyUsageFlags()
     {
+        var keyUsageFlags = _options.Value.KeyUsageFlags;
+
+        if (keyUsageFlags?.Any() == true)
+        {
+            return keyUsageFlags
+                .Select(Enum.Parse<X509KeyUsageFlags>)
+                .Aggregate((x, y) => x | y);
+        }
+
         return X509KeyUsageFlags.DigitalSignature
-               | X509KeyUsageFlags.KeyEncipherment
                | X509KeyUsageFlags.NonRepudiation
                | X509KeyUsageFlags.KeyCertSign;
     }

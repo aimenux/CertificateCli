@@ -1,5 +1,6 @@
 ﻿using App.Commands;
 using App.Extensions;
+using Lib.Configuration;
 using Lib.Helpers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,8 +30,9 @@ public static class Program
                 loggingBuilder.AddNonGenericLogger();
                 loggingBuilder.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
             })
-            .ConfigureServices((_, services) =>
+            .ConfigureServices((hostingContext, services) =>
             {
+                services.Configure<Settings>(hostingContext.Configuration.GetSection("Settings"));
                 services.Scan(scan =>
                 {
                     scan.FromCallingAssembly()
