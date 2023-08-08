@@ -1,4 +1,6 @@
 [![.NET](https://github.com/aimenux/CertificateCli/actions/workflows/ci.yml/badge.svg)](https://github.com/aimenux/CertificateCli/actions/workflows/ci.yml)
+[![NuGet](https://img.shields.io/nuget/v/CertificateCli)](https://www.nuget.org/packages/CertificateCli/)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=CertificateCli-Key&metric=coverage)](https://sonarcloud.io/summary/new_code?id=JwtCli-Key)
 
 # CertificateCli
 ```
