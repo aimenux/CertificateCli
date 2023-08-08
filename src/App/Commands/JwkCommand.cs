@@ -30,16 +30,18 @@ public class JwkCommand : AbstractCommand
 
     protected override void Execute(CommandLineApplication app)
     {
-        var parameters = new JwkParameters
+        ConsoleService.RenderStatus(() =>
         {
-            KeyId = KeyId,
-            KeyUse = KeyUse,
-            CertificateFile = CertificateFile,
-            CertificatePassword = CertificatePassword
-        };
-
-        var jwk = _certificateService.GenerateJwk(parameters);
-        ConsoleService.RenderJwk(parameters, jwk);
-        ConsoleService.CopyTextToClipboard(jwk);
+            var parameters = new JwkParameters
+            {
+                KeyId = KeyId,
+                KeyUse = KeyUse,
+                CertificateFile = CertificateFile,
+                CertificatePassword = CertificatePassword
+            };
+            var jwk = _certificateService.GenerateJwk(parameters);
+            ConsoleService.RenderJwk(parameters, jwk);
+            ConsoleService.CopyTextToClipboard(jwk);
+        });
     }
 }

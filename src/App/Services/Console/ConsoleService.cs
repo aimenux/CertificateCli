@@ -133,7 +133,7 @@ public class ConsoleService : IConsoleService
         AnsiConsole.Write(
             new Panel(new Text(jwk))
                 .Expand()
-                .Padding(1, 1)
+                .Padding(2, 1, 2, 1)
                 .SquareBorder()
                 .Header($"[b][yellow] {parameters.CertificateFile.ToUpper()} [/][/]"));
         AnsiConsole.WriteLine();

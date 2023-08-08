@@ -13,24 +13,23 @@ public class RsaCommand : PfxCommand
     public RsaCommand(ICertificateService certificateService, IConsoleService consoleService) : base(certificateService, consoleService)
     {
         CertificateFile = $"RSA-{DateTime.Now:yyyyMMddTHHmmss}.pfx";
-        KeySize = KeySizes.First();
+        KeySize = KeySizes[0];
     }
 
     protected override void Execute(CommandLineApplication app)
     {
-        var parameters = new PfxParameters
-        {
-            DnsName = DnsName,
-            KeySize = KeySize,
-            ValidityInYears = ValidityInYears,
-            CertificateFile = CertificateFile,
-            CertificatePassword = CertificatePassword,
-            OutputDirectory = OutputDirectory,
-            PfxType = PfxType.Rsa
-        };
-
         ConsoleService.RenderStatus(() =>
         {
+            var parameters = new PfxParameters
+            {
+                DnsName = DnsName,
+                KeySize = KeySize,
+                ValidityInYears = ValidityInYears,
+                CertificateFile = CertificateFile,
+                CertificatePassword = CertificatePassword,
+                OutputDirectory = OutputDirectory,
+                PfxType = PfxType.Rsa
+            };
             CertificateService.GenerateRsa(parameters);
             ConsoleService.RenderPfx(parameters);
         });

@@ -13,24 +13,23 @@ public class EccCommand : PfxCommand
     public EccCommand(ICertificateService certificateService, IConsoleService consoleService) : base(certificateService, consoleService)
     {
         CertificateFile = $"ECC-{DateTime.Now:yyyyMMddTHHmmss}.pfx";
-        KeySize = KeySizes.First();
+        KeySize = KeySizes[0];
     }
 
     protected override void Execute(CommandLineApplication app)
     {
-        var parameters = new PfxParameters
-        {
-            DnsName = DnsName,
-            KeySize = KeySize,
-            ValidityInYears = ValidityInYears,
-            CertificateFile = CertificateFile,
-            CertificatePassword = CertificatePassword,
-            OutputDirectory = OutputDirectory,
-            PfxType = PfxType.Ecc
-        };
-
         ConsoleService.RenderStatus(() =>
         {
+            var parameters = new PfxParameters
+            {
+                DnsName = DnsName,
+                KeySize = KeySize,
+                ValidityInYears = ValidityInYears,
+                CertificateFile = CertificateFile,
+                CertificatePassword = CertificatePassword,
+                OutputDirectory = OutputDirectory,
+                PfxType = PfxType.Ecc
+            };
             CertificateService.GenerateEcc(parameters);
             ConsoleService.RenderPfx(parameters);
         });
