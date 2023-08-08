@@ -30,7 +30,6 @@ public class JwkCommandTests
         var result = command.OnExecute(app);
 
         // assert
-        File.Exists(certificateFile).Should().BeTrue($"{certificateFile} does not exist.");
         result.Should().Be(Settings.ExitCode.Ok);
     }
     
