@@ -102,8 +102,8 @@ public class CertificateHelper : ICertificateHelper
             Use = keyUse ?? jsonWebKey.Use,
             Alg = securityAlgorithm ?? jsonWebKey.Alg,
             Kid = keyId ?? jsonWebKey.Kid,
-            E = jsonWebKey.E,
-            N = jsonWebKey.N,
+            Exp = jsonWebKey.E,
+            Mod = jsonWebKey.N,
         };
 
         return JsonSerializer.Serialize(jwk);
