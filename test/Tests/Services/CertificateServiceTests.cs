@@ -60,9 +60,9 @@ public class CertificateServiceTests
     }
     
     [Theory]
-    [InlineData("./Files/RSA.pfx", "4-tests", "1", Settings.DefaultKeyUse)]
-    [InlineData("./Files/ECC.pfx", "4-tests", "1", Settings.DefaultKeyUse)]
-    public void Should_Generate_JwkCertificate(string certificateFile, string certificatePassword, string keyId, string keyUse)
+    [InlineData("Files/RSA.pfx", "4-tests", "1", Settings.DefaultKeyUse)]
+    [InlineData("Files/ECC.pfx", "4-tests", "1", Settings.DefaultKeyUse)]
+    public void Should_Generate_Jwk(string certificateFile, string certificatePassword, string keyId, string keyUse)
     {
         // arrange
         var certificateService = ServicesFactory.CreateCertificateService();
