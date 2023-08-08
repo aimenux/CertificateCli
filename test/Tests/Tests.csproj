@@ -27,10 +27,10 @@
     </ItemGroup>
 
     <ItemGroup>
-        <None Update="Files\RSA.pfx">
+        <None Include="Files\RSA.pfx">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
-        <None Update="Files\ECC.pfx">
+        <None Include="Files\ECC.pfx">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
     </ItemGroup>
