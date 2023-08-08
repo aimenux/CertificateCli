@@ -1,0 +1,56 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFrameworks>net6.0;net7.0</TargetFrameworks>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UserSecretsId>CertificateCli-UserSecrets</UserSecretsId>
+		<Version>0.0.4-beta</Version>
+		<Authors>Aymen TROUDI</Authors>
+		<PackAsTool>true</PackAsTool>
+		<PackageId>CertificateCli</PackageId>
+		<PackageOutputPath>../../nugets</PackageOutputPath>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<ToolCommandName>CertificateCli</ToolCommandName>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<Description>A global tool to generate rsa/ecc certificates and json web keys</Description>
+		<PackageTags>dotnet, global tools, certificate, jwk</PackageTags>
+		<RepositoryType>git</RepositoryType>
+		<PackageProjectUrl>https://github.com/aimenux/CertificateCli</PackageProjectUrl>
+		<RepositoryUrl>$(PackageProjectUrl)</RepositoryUrl>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<IncludeSymbols>true</IncludeSymbols>
+		<Deterministic>true</Deterministic>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<EnablePackageValidation>true</EnablePackageValidation>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="CertificateManager" Version="1.0.8" />
+		<PackageReference Include="FluentValidation" Version="11.6.0" />
+		<PackageReference Include="McMaster.Extensions.CommandLineUtils" Version="4.0.2" />
+		<PackageReference Include="McMaster.Extensions.Hosting.CommandLine" Version="4.0.2" />
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
+		<PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Options" Version="6.0.0" />
+		<PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.32.1" />
+		<PackageReference Include="Scrutor" Version="4.2.2" />
+		<PackageReference Include="Spectre.Console" Version="0.47.0" />
+		<PackageReference Include="TextCopy" Version="6.2.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="..\..\README.md" Pack="true" PackagePath="\" />
+	</ItemGroup>
+	
+	<ItemGroup>
+		<None Update="appsettings.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+</Project>
