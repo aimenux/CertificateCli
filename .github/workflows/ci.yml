@@ -26,6 +26,6 @@ jobs:
     - name: Publish CertificateCli
       uses: alirezanet/publish-nuget@v3.1.0
       with:
-          PACKAGE_NAME: CertificateCli
-          PROJECT_FILE_PATH: App/App.csproj
-          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+        PACKAGE_NAME: CertificateCli
+        PROJECT_FILE_PATH: src/App/App.csproj
+        NUGET_KEY: ${{secrets.NUGET_API_KEY}}
